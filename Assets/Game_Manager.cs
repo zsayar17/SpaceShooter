@@ -24,6 +24,7 @@ public class Game_Manager : MonoBehaviour
 
         if (!isPaused && !gameEnded)
         {
+            // Diğer objeler ile bağlanacak
             //UI_Manager.instance.ChangeHealth(25); // get damage
             //
             //UI_Manager.instance.ChangeStamina(50); // dash

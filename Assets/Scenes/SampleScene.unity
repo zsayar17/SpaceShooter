@@ -1827,7 +1827,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 75}
+  m_AnchoredPosition: {x: 0, y: 100}
   m_SizeDelta: {x: 1000, y: 30}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &976498267
@@ -2899,6 +2899,7 @@ MonoBehaviour:
   gameplayScreen: {fileID: 155247893}
   pauseScreen: {fileID: 1503169480}
   deathScreen: {fileID: 291668793}
+  redDamage: {fileID: 5597204270014059250, guid: f170a20da1f034c41ba4b659c7936b0d, type: 3}
   healthbarSlider: {fileID: 1132958071}
   healthbarEaseSlider: {fileID: 117053478}
   staminaSlider: {fileID: 45284920}

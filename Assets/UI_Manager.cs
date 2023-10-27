@@ -12,6 +12,8 @@ public class UI_Manager : MonoBehaviour
     public GameObject gameplayScreen;
     public GameObject pauseScreen;
     public GameObject deathScreen;
+
+    public GameObject redDamage;
     
     public Slider healthbarSlider;
     public Slider healthbarEaseSlider;
@@ -65,7 +67,7 @@ public class UI_Manager : MonoBehaviour
             
             if (bossHealthbarEaseSlider.value > bossHealthbarSlider.value && bossHealthEaseWaitTime <= 0)
                 bossHealthbarEaseSlider.value -= 100 * Time.deltaTime;
-
+            
             if (tempScore > 0)
             {
                 tempScore -= 1;
@@ -89,6 +91,8 @@ public class UI_Manager : MonoBehaviour
 
     public void ChangeHealth(float damage)
     {
+        Instantiate(redDamage, new Vector2(0,0), Quaternion.identity);
+        
         healthbarSlider.value -= damage;
 
         healthEaseWaitTime = .25f;
