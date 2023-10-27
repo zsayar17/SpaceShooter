@@ -9,12 +9,13 @@ public class UI_Manager : MonoBehaviour
 {
     public static UI_Manager instance { get; private set; }
     
+    [Space] [Header("Object References")] [Space] [Space]
     public GameObject gameplayScreen;
     public GameObject pauseScreen;
     public GameObject deathScreen;
-
     public GameObject redDamage;
     
+    [Space][Header("Slider Bars")][Space] [Space]
     public Slider healthbarSlider;
     public Slider healthbarEaseSlider;
     
@@ -28,6 +29,7 @@ public class UI_Manager : MonoBehaviour
     private float staminaEaseWaitTime;
     private float bossHealthEaseWaitTime;
     
+    [Space][Header("Text References")][Space] [Space]
     public TMP_Text scoreText;
     public TMP_Text endScoreText;
     private float currentScore;
