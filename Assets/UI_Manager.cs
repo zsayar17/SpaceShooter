@@ -7,6 +7,12 @@ using TMPro;
 
 public class UI_Manager : MonoBehaviour
 {
+    public static UI_Manager instance { get; private set; }
+    
+    public GameObject gameplayScreen;
+    public GameObject pauseScreen;
+    public GameObject deathScreen;
+    
     public Slider healthbarSlider;
     public Slider healthbarEaseSlider;
     
@@ -21,55 +27,70 @@ public class UI_Manager : MonoBehaviour
     private float bossHealthEaseWaitTime;
     
     public TMP_Text scoreText;
+    public TMP_Text endScoreText;
     private float currentScore;
     private float tempScore;
 
     private void Awake()
     {
-        scoreText.text = "0";
+        if (instance == null) instance = this;
+        
+        pauseScreen.SetActive(false);
+        deathScreen.SetActive(false);
+        gameplayScreen.SetActive(true);
+        
         bossHealthbarSlider.transform.parent.gameObject.SetActive(false);
+        
+        scoreText.text = "0";
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (!Game_Manager.instance.isPaused && !Game_Manager.instance.gameEnded)
         {
-            ChangeHealth(25);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                ChangeHealth(25);
+                
+                ShowBossHealth();
+                ChangeBossHealth(25);
+                
+                ChangeStamina(50);
+                ChangeScore(UnityEngine.Random.Range(50,150));
+            }
+
+            if (healthEaseWaitTime > 0)
+                healthEaseWaitTime -= Time.deltaTime;
             
-            ShowBossHealth();
-            ChangeBossHealth(25);
+            if (staminaEaseWaitTime > 0)
+                staminaEaseWaitTime -= Time.deltaTime;
             
-            ChangeStamina(50);
-            ChangeScore(UnityEngine.Random.Range(50,150));
+            if (bossHealthEaseWaitTime > 0)
+                bossHealthEaseWaitTime -= Time.deltaTime;
+
+            if (healthbarEaseSlider.value > healthbarSlider.value && healthEaseWaitTime <= 0)
+                healthbarEaseSlider.value -= 100 * Time.deltaTime;
+            
+            if (staminaEaseSlider.value > staminaSlider.value && staminaEaseWaitTime <= 0)
+                staminaEaseSlider.value -= 100 * Time.deltaTime;
+            
+            if (bossHealthbarEaseSlider.value > bossHealthbarSlider.value && bossHealthEaseWaitTime <= 0)
+                bossHealthbarEaseSlider.value -= 100 * Time.deltaTime;
+
+            if (tempScore > 0)
+            {
+                tempScore -= 1;
+                currentScore += 1;
+
+                scoreText.text = currentScore.ToString();
+            }
+            else
+                tempScore = 0;
         }
-
-        if (healthEaseWaitTime > 0)
-            healthEaseWaitTime -= Time.deltaTime;
-        
-        if (staminaEaseWaitTime > 0)
-            staminaEaseWaitTime -= Time.deltaTime;
-        
-        if (bossHealthEaseWaitTime > 0)
-            bossHealthEaseWaitTime -= Time.deltaTime;
-
-        if (healthbarEaseSlider.value > healthbarSlider.value && healthEaseWaitTime <= 0)
-            healthbarEaseSlider.value -= 100 * Time.deltaTime;
-        
-        if (staminaEaseSlider.value > staminaSlider.value && staminaEaseWaitTime <= 0)
-            staminaEaseSlider.value -= 100 * Time.deltaTime;
-        
-        if (bossHealthbarEaseSlider.value > bossHealthbarSlider.value && bossHealthEaseWaitTime <= 0)
-            bossHealthbarEaseSlider.value -= 100 * Time.deltaTime;
-
-        if (tempScore > 0)
+        else if (Game_Manager.instance.gameEnded)
         {
-            tempScore -= 1;
-            currentScore += 1;
-
-            scoreText.text = currentScore.ToString();
+            endScoreText.text = "Your Score: " + currentScore;
         }
-        else
-            tempScore = 0;
     }
     
     public void ChangeScore(float score)
