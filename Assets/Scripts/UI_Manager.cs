@@ -72,13 +72,12 @@ public class UI_Manager : MonoBehaviour
             
             if (tempScore > 0)
             {
-                tempScore -= 1;
                 currentScore += 1;
 
                 scoreText.text = currentScore.ToString();
+
+                tempScore -= 1;
             }
-            else
-                tempScore = 0;
         }
         else if (Game_Manager.instance.gameEnded)
         {
@@ -88,7 +87,7 @@ public class UI_Manager : MonoBehaviour
     
     public void ChangeScore(float score)
     {
-        tempScore = score;
+        tempScore += score;
     }
 
     public void ChangeHealth(float damage)
