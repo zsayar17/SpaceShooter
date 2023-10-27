@@ -48,17 +48,6 @@ public class UI_Manager : MonoBehaviour
     {
         if (!Game_Manager.instance.isPaused && !Game_Manager.instance.gameEnded)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                ChangeHealth(25);
-                
-                ShowBossHealth();
-                ChangeBossHealth(25);
-                
-                ChangeStamina(50);
-                ChangeScore(UnityEngine.Random.Range(50,150));
-            }
-
             if (healthEaseWaitTime > 0)
                 healthEaseWaitTime -= Time.deltaTime;
             

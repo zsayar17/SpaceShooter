@@ -19,18 +19,34 @@ public class Game_Manager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !gameEnded)
             isPaused = !isPaused;
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            UI_Manager.instance.gameplayScreen.SetActive(false);
-            UI_Manager.instance.pauseScreen.SetActive(false);
-            
-            UI_Manager.instance.deathScreen.SetActive(true);
-            
-            gameEnded = true;
-        }
         
         PauseCheck();
+
+        if (!isPaused && !gameEnded)
+        {
+            //UI_Manager.instance.ChangeHealth(25); // get damage
+            //
+            //UI_Manager.instance.ChangeStamina(50); // dash
+            //
+            //// if boss is on scene
+            //
+            //UI_Manager.instance.ShowBossHealth();
+            //UI_Manager.instance.ChangeBossHealth(25); // boss get damage
+            //
+            //// enemy death
+            //
+            //UI_Manager.instance.ChangeScore(UnityEngine.Random.Range(50,150));
+        }
+    }
+
+    private void EndGame()
+    {
+        UI_Manager.instance.gameplayScreen.SetActive(false);
+        UI_Manager.instance.pauseScreen.SetActive(false);
+            
+        UI_Manager.instance.deathScreen.SetActive(true);
+            
+        gameEnded = true;
     }
 
     private void PauseCheck()
