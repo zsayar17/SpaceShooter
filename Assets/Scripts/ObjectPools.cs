@@ -14,7 +14,7 @@ public class SpawnManager
 
         EnemyPool.Instance = enemyPool;
     }
-
+    
 }
 
 
@@ -22,7 +22,7 @@ public class SpawnManager
 public class ObjectPools
 {
      [SerializeField] List<SpaceObject> spaceObjects;
-     List<GameObject> outPool, inPool;
+     public List<GameObject> outPool, inPool;
 
     public void Initilized(Transform context)
     {
@@ -54,17 +54,30 @@ public class ObjectPools
     public void Out(GameObject outObject)
     {
         outPool.Add(outObject);
-        outPool.Remove(outObject);
+        inPool.Remove(outObject);
 
-        outObject.SetActive(false);
+        outObject.SetActive(true);
     }
-
+    public GameObject Out(int index,Vector3 position)
+    {
+        outPool.Add(inPool[index]);
+        inPool[index].SetActive(true);
+        inPool[index].transform.position = position;
+        inPool.Remove(inPool[index]);
+        return inPool[index];
+    }
 }
 
 [Serializable]
 public class EnemyPool : ObjectPools
 {
+    public Transform origin;
+
+    public float repeatTime;
+    public float width,height;
     private static EnemyPool instance;
+
+    private RepeatTime rptime = new RepeatTime();
 
     public static EnemyPool Instance
     {
@@ -79,10 +92,22 @@ public class EnemyPool : ObjectPools
 
         set
         {
+
             instance = value;
         }
     }
-    
+
+    public void Spawn()
+    {
+        if (rptime.Repeat(repeatTime) && inPool.Count>0)
+        {
+            float x = UnityEngine.Random.Range(origin.transform.position.x - width / 2, origin.transform.position.x + width / 2);
+            float y = UnityEngine.Random.Range(origin.transform.position.y - height / 2, origin.transform.position.y + height / 2);
+            Out(UnityEngine.Random.Range(0, inPool.Count - 1), new Vector3(x, y, 0));
+        }
+    }
+
+
 
 }
 
@@ -93,6 +118,27 @@ public class SpaceObject
 {
     public int count;
     public GameObject spaceObject;
+}
+
+public class RepeatTime
+{
+
+    private float currentTime;
+    
+
+    public bool Repeat(float repeatTime)
+    {
+        if (Time.time >= currentTime)
+        {
+
+            currentTime = Time.time + repeatTime;
+            return true;
+        }
+        return false;
+    }
+
+
+
 }
 
 
