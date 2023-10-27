@@ -9,6 +9,7 @@ public class Game_Manager : MonoBehaviour
     public static Game_Manager instance { get; private set; }
     [HideInInspector] public bool isPaused = false;
     [HideInInspector] public bool gameEnded = false;
+    [SerializeField] private SpawnManager spawnManager;
 
     private void Awake()
     {
