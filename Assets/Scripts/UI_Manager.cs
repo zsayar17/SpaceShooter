@@ -32,9 +32,9 @@ public class UI_Manager : MonoBehaviour
     
     [Space] [Header("Text References")][Space] [Space]
     public TMP_Text timerText;
-    private float timer;
     public TMP_Text scoreText;
     public TMP_Text endScoreText;
+    public TMP_Text survivalTimeText;
     private float currentScore;
     private float tempScore;
 
@@ -51,19 +51,13 @@ public class UI_Manager : MonoBehaviour
         
         scoreText.text = "0";
         timerText.text = Game_Manager.instance.timer.ToString();
-        timer = Game_Manager.instance.timer;
+        survivalTimeText.text = "You survived for 0 seconds";
     }
 
     private void Update()
     {
         if (!Game_Manager.instance.isPaused && !Game_Manager.instance.gameEnded)
         {
-            if (timer > 0)
-            {
-                timer -= Time.deltaTime;
-                timerText.text = Mathf.Round(timer).ToString();
-            }
-            
             if (healthEaseWaitTime > 0)
                 healthEaseWaitTime -= Time.deltaTime;
             
@@ -94,6 +88,7 @@ public class UI_Manager : MonoBehaviour
         else if (Game_Manager.instance.gameEnded)
         {
             endScoreText.text = "Your Score: " + currentScore;
+            survivalTimeText.text = "You survived for "+ Mathf.Round(Game_Manager.instance.survivalTime) + " seconds";
         }
     }
     

@@ -13,6 +13,7 @@ public class Game_Manager : MonoBehaviour
 
     [Space] [Header("Game Settings")][Space] [Space]
     public float timer;
+    public float survivalTime;
 
     private void Awake()
     {
@@ -28,11 +29,18 @@ public class Game_Manager : MonoBehaviour
 
         if (!isPaused && !gameEnded)
         {
-            if (timer < 0)
+            survivalTime += Time.deltaTime;
+            
+            if (timer <= 0)
             {
                 // Spawn boss
                 //UI_Manager.instance.ShowBossHealth();
                 //UI_Manager.instance.ChangeBossHealth(25); // boss get damage
+            }
+            else
+            {
+                timer -= Time.deltaTime;
+                UI_Manager.instance.timerText.text = Mathf.Round(timer).ToString();
             }
             
             // Diğer objeler ile bağlanacak
@@ -50,9 +58,9 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
-    private void EndGame(bool win=false)
+    public void EndGame(bool win=false)
     {
-        if (win)
+        if (win) // Win
         {
             UI_Manager.instance.gameplayScreen.SetActive(false);
             UI_Manager.instance.pauseScreen.SetActive(false);
@@ -60,7 +68,7 @@ public class Game_Manager : MonoBehaviour
             
             UI_Manager.instance.winScreen.SetActive(true);
         }
-        else
+        else // Lose
         {
             UI_Manager.instance.gameplayScreen.SetActive(false);
             UI_Manager.instance.pauseScreen.SetActive(false);
