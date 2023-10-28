@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KamikazeShip : Ship
 {
-    Transform playertransform;
+    public Transform playertransform;
     public float damage;
 
     public override void move()

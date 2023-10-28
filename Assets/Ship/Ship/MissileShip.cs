@@ -7,11 +7,13 @@ public class MissileShip: Ship
 {
     private Vector3 _pos;
     private bool istimesup;
+    private Transform barreltransform;
 
 
     private void Start()
     {
         _pos = movemanager.getRandomPointOnScreen();
+        barreltransform = transform.GetChild(0);
     }
     public override void move()
     {
