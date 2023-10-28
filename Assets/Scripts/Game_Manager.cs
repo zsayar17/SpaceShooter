@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -13,14 +14,19 @@ public class Game_Manager : MonoBehaviour
 
     [Space] [Header("Game Objects")] [Space] [Space]
     public Camera cam;
+    public GameObject[] enemyShips;
 
     [Space] [Header("Game Settings")] [Space] [Space]
     public float timer;
     public float survivalTime;
 
+    private float generateTimer;
+
     private void Awake()
     {
         if (instance == null) instance = this;
+        
+        generateTimer = Random.Range(1f, 10f);
     }
 
     private void Update()
@@ -42,8 +48,25 @@ public class Game_Manager : MonoBehaviour
             {
                 timer -= Time.deltaTime;
                 UI_Manager.instance.timerText.text = Mathf.Round(timer).ToString();
+
+                if (generateTimer <= 0f)
+                {
+                    GenerateEnemyShips(Random.Range(0, 2));
+                }
+                else
+                {
+                    generateTimer -= Time.deltaTime;
+                }
             }
         }
+    }
+
+    private void GenerateEnemyShips(int rnd)
+    {
+        var pos = new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), 0f);
+        Instantiate(enemyShips[rnd], pos, Quaternion.identity);
+
+        generateTimer = Random.Range(1f, 10f);
     }
 
     public void EndGame(bool win=false)
