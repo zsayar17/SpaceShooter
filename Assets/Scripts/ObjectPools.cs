@@ -12,7 +12,6 @@ public class SpawnManager
     {
         enemyPool.Initilized(manager.transform);
 
-        EnemyPool.Instance = enemyPool;
     }
     
 }
@@ -58,12 +57,11 @@ public class ObjectPools
 
         outObject.SetActive(true);
     }
-    public GameObject Out(int index,Vector3 position)
+    public GameObject Out(int index)
     {
         outPool.Add(inPool[index]);
         inPool[index].SetActive(true);
-        inPool[index].transform.position = position;
-        inPool.Remove(inPool[index]);
+        ///inPool.Remove(inPool[index]);
         return inPool[index];
     }
 }
@@ -75,35 +73,22 @@ public class EnemyPool : ObjectPools
 
     public float repeatTime;
     public float width,height;
-    private static EnemyPool instance;
 
     private RepeatTime rptime = new RepeatTime();
 
-    public static EnemyPool Instance
-    {
-        get
-        {
-            if(instance == null)
-            {
-                instance = new EnemyPool();
-            }
-            return instance;
-        }
-
-        set
-        {
-
-            instance = value;
-        }
-    }
 
     public void Spawn()
     {
         if (rptime.Repeat(repeatTime) && inPool.Count>0)
         {
+            Transform trsfm;
             float x = UnityEngine.Random.Range(origin.transform.position.x - width / 2, origin.transform.position.x + width / 2);
             float y = UnityEngine.Random.Range(origin.transform.position.y - height / 2, origin.transform.position.y + height / 2);
-            Out(UnityEngine.Random.Range(0, inPool.Count - 1), new Vector3(x, y, 0));
+            trsfm = Out(UnityEngine.Random.Range(0, inPool.Count - 1)).transform;
+            trsfm.position = new Vector3(x, y, 0);
+
+            inPool.Remove(trsfm.gameObject);
+
         }
     }
 
