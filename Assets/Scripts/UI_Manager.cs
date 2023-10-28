@@ -13,6 +13,7 @@ public class UI_Manager : MonoBehaviour
     public GameObject gameplayScreen;
     public GameObject pauseScreen;
     public GameObject deathScreen;
+    public GameObject winScreen;
     public GameObject redDamage;
     
     [Space][Header("Slider Bars")][Space] [Space]
@@ -41,6 +42,7 @@ public class UI_Manager : MonoBehaviour
         
         pauseScreen.SetActive(false);
         deathScreen.SetActive(false);
+        winScreen.SetActive(false);
         gameplayScreen.SetActive(true);
         
         bossHealthbarSlider.transform.parent.gameObject.SetActive(false);

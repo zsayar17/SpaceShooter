@@ -41,12 +41,24 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
-    private void EndGame()
+    private void EndGame(bool win=false)
     {
-        UI_Manager.instance.gameplayScreen.SetActive(false);
-        UI_Manager.instance.pauseScreen.SetActive(false);
+        if (win)
+        {
+            UI_Manager.instance.gameplayScreen.SetActive(false);
+            UI_Manager.instance.pauseScreen.SetActive(false);
+            UI_Manager.instance.deathScreen.SetActive(false);
             
-        UI_Manager.instance.deathScreen.SetActive(true);
+            UI_Manager.instance.winScreen.SetActive(true);
+        }
+        else
+        {
+            UI_Manager.instance.gameplayScreen.SetActive(false);
+            UI_Manager.instance.pauseScreen.SetActive(false);
+            UI_Manager.instance.winScreen.SetActive(false);
+            
+            UI_Manager.instance.deathScreen.SetActive(true);   
+        }
             
         gameEnded = true;
     }
