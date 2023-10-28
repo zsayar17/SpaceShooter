@@ -6134,11 +6134,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8335825032714907846, guid: bba541a80afd793458ef1182f9057874, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 18.1
       objectReference: {fileID: 0}
     - target: {fileID: 8335825032714907846, guid: bba541a80afd793458ef1182f9057874, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 6.8
       objectReference: {fileID: 0}
     - target: {fileID: 8335825032714907846, guid: bba541a80afd793458ef1182f9057874, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7236,6 +7236,7 @@ MonoBehaviour:
       repeatTime: 0
       width: 0
       height: 0
+  playerTransform: {fileID: 1943312548}
   cam: {fileID: 519420031}
   enemyShips:
   - {fileID: 3406073460374046661, guid: bdbe011aebc8db84e84c39666e2b93d2, type: 3}
@@ -8634,6 +8635,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!4 &1943312548 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8335825032714907846, guid: bba541a80afd793458ef1182f9057874, type: 3}
+  m_PrefabInstance: {fileID: 524081702}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2035984332
 GameObject:
   m_ObjectHideFlags: 0

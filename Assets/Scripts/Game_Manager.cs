@@ -13,6 +13,7 @@ public class Game_Manager : MonoBehaviour
     [SerializeField] private SpawnManager spawnManager;
 
     [Space] [Header("Game Objects")] [Space] [Space]
+    public Transform playerTransform;
     public Camera cam;
     public GameObject[] enemyShips;
 
@@ -51,7 +52,7 @@ public class Game_Manager : MonoBehaviour
 
                 if (generateTimer <= 0f)
                 {
-                    GenerateEnemyShips(Random.Range(0, 2));
+                    GenerateEnemyShips(Random.Range(0, enemyShips.Length));
                 }
                 else
                 {
@@ -63,10 +64,14 @@ public class Game_Manager : MonoBehaviour
 
     private void GenerateEnemyShips(int rnd)
     {
-        var pos = new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), 0f);
-        Instantiate(enemyShips[rnd], pos, Quaternion.identity);
+        Vector3 pos = new Vector3(Random.Range(0, 30), Random.Range(-20, 20), 0f);
+        GameObject enemy = Instantiate(enemyShips[rnd], pos, Quaternion.identity);
+        if (enemy.GetComponent<BasicShip>())
+            enemy.GetComponent<BasicShip>().playertransform = playerTransform; 
+        else if (enemy.GetComponent<KamikazeShip>())
+            enemy.GetComponent<KamikazeShip>().playertransform = playerTransform;
 
-        generateTimer = Random.Range(1f, 10f);
+        generateTimer = Random.Range(2f, 5f);
     }
 
     public void EndGame(bool win=false)
