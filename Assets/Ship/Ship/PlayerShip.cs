@@ -23,6 +23,10 @@ public class PlayerShip : Ship
 
     private void Update()
     {
+        if (health <= 0f)
+            Game_Manager.instance.EndGame(false);
+        
+        
         if (dashLerp != 0f)
             dashLerp = Mathf.Lerp(dashLerp, 0, 10 * Time.deltaTime);
         
