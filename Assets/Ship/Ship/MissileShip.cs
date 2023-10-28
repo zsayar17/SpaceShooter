@@ -25,8 +25,8 @@ public class MissileShip: Ship
     public override void attack()
     {
         if (!istimesup) return;
-        
-        //actionmanager.spawn()
+
+        Instantiate(barreltransform);
         istimesup = false;
     }
     public override IEnumerator waitToAction()
