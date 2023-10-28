@@ -29,6 +29,8 @@ public class UI_Manager : MonoBehaviour
     private float healthEaseWaitTime;
     private float staminaEaseWaitTime;
     private float bossHealthEaseWaitTime;
+
+    public bool canGainStamina = false;
     
     [Space] [Header("Text References")][Space] [Space]
     public TMP_Text timerText;
@@ -69,9 +71,14 @@ public class UI_Manager : MonoBehaviour
 
             if (healthbarEaseSlider.value > healthbarSlider.value && healthEaseWaitTime <= 0)
                 healthbarEaseSlider.value -= 100 * Time.deltaTime;
-            
+
             if (staminaEaseSlider.value > staminaSlider.value && staminaEaseWaitTime <= 0)
+            {
                 staminaEaseSlider.value -= 100 * Time.deltaTime;
+                canGainStamina = false;
+            }
+            else
+                canGainStamina = true;
             
             if (bossHealthbarEaseSlider.value > bossHealthbarSlider.value && bossHealthEaseWaitTime <= 0)
                 bossHealthbarEaseSlider.value -= 100 * Time.deltaTime;
@@ -106,9 +113,18 @@ public class UI_Manager : MonoBehaviour
         healthEaseWaitTime = .25f;
     }
     
-    public void ChangeStamina(float stamina)
+    public void ChangeStamina(float stamina, bool increase = false)
     {
-        staminaSlider.value -= stamina;
+        if (increase)
+        {
+            staminaSlider.value += stamina;
+            staminaEaseSlider.value += stamina;
+        }
+        else
+        {
+            staminaSlider.value -= stamina;
+            staminaEaseSlider.value -= stamina;
+        }
 
         staminaEaseWaitTime = .25f;
     }
