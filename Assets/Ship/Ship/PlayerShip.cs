@@ -52,7 +52,7 @@ public class PlayerShip : Ship
         }
 
         if (Input.GetMouseButtonDown(0))
-            Instantiate(bullet, barrel.position,barrel.rotation).GetComponent<BasicMissile>().owner = "Player";
+            Instantiate(bullet, barrel.position, barrel.rotation);
 
     }
 

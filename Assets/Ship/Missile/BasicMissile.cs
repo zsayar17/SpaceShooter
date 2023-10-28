@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,10 +17,10 @@ public class BasicMissile : Missile
         movemanager.Move(target_pos, speed, false);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if ((owner == "Enemy" && actionmanager.hitDamage(collision, "Player", damage))
-            || actionmanager.hitDamage(collision, "Enemy", damage))
+        if ((owner == "Enemy" && actionmanager.hitDamage(collider, "Player", damage))
+            || actionmanager.hitDamage(collider, "Enemy", damage))
             Destroy(gameObject);
     }
 }

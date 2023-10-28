@@ -12,9 +12,9 @@ public class KamikazeShip : Ship
         movemanager.Rotate(playertransform.position);
         movemanager.Move(playertransform.position, speed, true);
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (actionmanager.hitDamage(collision, "Player", damage))
+        if (actionmanager.hitDamage(collider, "Player", damage))
             Destroy(gameObject);
     }
 }

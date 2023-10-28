@@ -26,13 +26,13 @@ public class MissileShip: Ship
     {
         if (!istimesup) return;
 
-        Instantiate(bullet, barreltransform);
+        Instantiate(bullet, barreltransform.position, barreltransform.rotation);
         istimesup = false;
     }
     public override IEnumerator waitToAction()
     {
         if (istimesup) yield return null;
-
+        Debug.Log("deneme");
         yield return new WaitForSeconds(actiontime);
         istimesup = true;
     }

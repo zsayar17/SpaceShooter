@@ -20,6 +20,8 @@ public class Ship : MonoBehaviour
     {
         movemanager = new MoveManager(transform);
         actionmanager = new ActionManager(this.gameObject);
+
+        StartCoroutine(waitToAction());
     }
     private void FixedUpdate()
     {
@@ -27,7 +29,7 @@ public class Ship : MonoBehaviour
         move();
     }
 
-    public virtual IEnumerator waitToAction() { return null; }
+    public virtual IEnumerator waitToAction() { yield return null; }
     public virtual void move() { }
     public virtual void attack() { }
 }
