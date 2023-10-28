@@ -5,7 +5,14 @@ using UnityEngine;
 public class BasicShip : Ship
 {
     public Transform playertransform;
+    private Transform rightwing, leftwing;
     private bool istimesup;
+
+    private void Start()
+    {
+        rightwing = transform.GetChild(0).transform;
+        leftwing = transform.GetChild(1).transform;
+    }
 
     public override void move()
     {
