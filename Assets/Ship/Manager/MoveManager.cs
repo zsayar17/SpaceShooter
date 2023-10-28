@@ -48,7 +48,6 @@ public class MoveManager
         float rotate_angle = 0.0f;
         int direction = 1;
 
-
         angle = GetAngle(target_pos, _transform.position, 90);
         if (old_angle != angle)
         {
