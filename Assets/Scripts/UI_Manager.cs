@@ -16,7 +16,7 @@ public class UI_Manager : MonoBehaviour
     public GameObject winScreen;
     public GameObject redDamage;
     
-    [Space][Header("Slider Bars")][Space] [Space]
+    [Space] [Header("Slider Bars")][Space] [Space]
     public Slider healthbarSlider;
     public Slider healthbarEaseSlider;
     
@@ -30,7 +30,9 @@ public class UI_Manager : MonoBehaviour
     private float staminaEaseWaitTime;
     private float bossHealthEaseWaitTime;
     
-    [Space][Header("Text References")][Space] [Space]
+    [Space] [Header("Text References")][Space] [Space]
+    public TMP_Text timerText;
+    private float timer;
     public TMP_Text scoreText;
     public TMP_Text endScoreText;
     private float currentScore;
@@ -48,12 +50,20 @@ public class UI_Manager : MonoBehaviour
         bossHealthbarSlider.transform.parent.gameObject.SetActive(false);
         
         scoreText.text = "0";
+        timerText.text = Game_Manager.instance.timer.ToString();
+        timer = Game_Manager.instance.timer;
     }
 
     private void Update()
     {
         if (!Game_Manager.instance.isPaused && !Game_Manager.instance.gameEnded)
         {
+            if (timer > 0)
+            {
+                timer -= Time.deltaTime;
+                timerText.text = Mathf.Round(timer).ToString();
+            }
+            
             if (healthEaseWaitTime > 0)
                 healthEaseWaitTime -= Time.deltaTime;
             

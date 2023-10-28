@@ -11,6 +11,9 @@ public class Game_Manager : MonoBehaviour
     [HideInInspector] public bool gameEnded = false;
     [SerializeField] private SpawnManager spawnManager;
 
+    [Space] [Header("Game Settings")][Space] [Space]
+    public float timer;
+
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -25,6 +28,13 @@ public class Game_Manager : MonoBehaviour
 
         if (!isPaused && !gameEnded)
         {
+            if (timer < 0)
+            {
+                // Spawn boss
+                //UI_Manager.instance.ShowBossHealth();
+                //UI_Manager.instance.ChangeBossHealth(25); // boss get damage
+            }
+            
             // Diğer objeler ile bağlanacak
             //UI_Manager.instance.ChangeHealth(25); // get damage
             //
@@ -32,8 +42,7 @@ public class Game_Manager : MonoBehaviour
             //
             //// if boss is on scene
             //
-            //UI_Manager.instance.ShowBossHealth();
-            //UI_Manager.instance.ChangeBossHealth(25); // boss get damage
+            
             //
             //// enemy death
             //
