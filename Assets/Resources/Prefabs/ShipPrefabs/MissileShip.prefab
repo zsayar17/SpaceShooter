@@ -134,3 +134,4 @@ MonoBehaviour:
   actiontime: 0
   movemanager:
     _rotate_speed: 10
+  bullet: {fileID: 8847956223620575305, guid: b06a5a3949a93402c92d3d15a64aee52, type: 3}

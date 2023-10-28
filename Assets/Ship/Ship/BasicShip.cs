@@ -24,8 +24,8 @@ public class BasicShip : Ship
     {
         if (!istimesup) return;
 
-        Instantiate(bullet, rightwing).GetComponent<BasicMissile>().owner = "enemy";
-        Instantiate(bullet, leftwing).GetComponent<BasicMissile>().owner = "enemy";
+        Instantiate(bullet, rightwing).GetComponent<BasicMissile>().owner = "Enemy";
+        Instantiate(bullet, leftwing).GetComponent<BasicMissile>().owner = "Enemy";
         istimesup = false;
     }
     public override IEnumerator waitToAction()

@@ -18,8 +18,8 @@ public class BasicMissile : Missile
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((owner == "enemy" && actionmanager.hitDamage(collision, "player", damage))
-            || actionmanager.hitDamage(collision, "enemy", damage))
+        if ((owner == "Enemy" && actionmanager.hitDamage(collision, "Player", damage))
+            || actionmanager.hitDamage(collision, "Enemy", damage))
             Destroy(gameObject);
     }
 }

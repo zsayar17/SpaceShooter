@@ -26,7 +26,7 @@ public class MissileShip: Ship
     {
         if (!istimesup) return;
 
-        Instantiate(barreltransform);
+        Instantiate(bullet, barreltransform);
         istimesup = false;
     }
     public override IEnumerator waitToAction()

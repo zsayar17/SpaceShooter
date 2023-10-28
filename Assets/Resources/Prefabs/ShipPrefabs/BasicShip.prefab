@@ -135,6 +135,7 @@ MonoBehaviour:
   actiontime: 0
   movemanager:
     _rotate_speed: 10
+  bullet: {fileID: 626151186898779276, guid: ae35e97d16449412d90469b3490e5eb1, type: 3}
   playertransform: {fileID: 0}
 --- !u!1 &7043370593597948366
 GameObject:
