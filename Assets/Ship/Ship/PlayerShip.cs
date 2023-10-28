@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class PlayerShip : Ship
 {
-    // Start is called before the first frame update
-    [SerializeField] private MoveManager _movemanager;
     Vector3 _pos;
-
-    void Awake()
-    {
-        _movemanager = new MoveManager(this.transform);
-
-    }
-    void FixedUpdate()
+    public override void move()
     {
         _pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        _pos.z = 0;
 
-        _movemanager.Rotate(_pos);
-        _movemanager.Move(_pos, speed, true);
+        movemanager.Rotate(_pos);
+        movemanager.Move(_pos, speed, true);
     }
+
+    private void Update()
+    {
+        //if (Input.GetMouseButtonDown(0)) //get from pool 
+    }
+
 }
