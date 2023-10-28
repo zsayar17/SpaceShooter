@@ -9,7 +9,12 @@ public class PlayerShip : Ship
     private float dashLerp;
 
     public float stamina = 100;
-    
+    private Transform barrel;
+
+    private void Start()
+    {
+        barrel = transform.GetChild(0);
+    }
     public override void move()
     {
         _pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -37,6 +42,10 @@ public class PlayerShip : Ship
             stamina += 10 * Time.deltaTime;
             UI_Manager.instance.ChangeStamina(10 * Time.deltaTime, true);
         }
+
+        if (Input.GetMouseButtonDown(0))
+            Instantiate(bullet, barrel).GetComponent<BasicMissile>().owner = "player";
+          
     }
 
 }

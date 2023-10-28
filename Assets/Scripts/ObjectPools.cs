@@ -7,31 +7,33 @@ using System;
 public class SpawnManager
 {
     public EnemyPool enemyPool;
-    
+    public BulletPool bulletPool;
+    public BulletPool guidedbulletPool;
     public void Awake(MonoBehaviour manager)
     {
         enemyPool.Initilized(manager.transform);
-
+        bulletPool.Initilized(manager.transform);
+        guidedbulletPool.Initilized(manager.transform);
     }
-    
+
 }
 
 
 [Serializable]
 public class ObjectPools
 {
-     [SerializeField] List<SpaceObject> spaceObjects;
-     public List<GameObject> outPool, inPool;
+    [SerializeField] List<SpaceObject> spaceObjects;
+    protected List<GameObject> outPool, inPool;
 
     public void Initilized(Transform context)
     {
         outPool = new List<GameObject>();
         inPool = new List<GameObject>();
 
-        for(int i = 0; i < spaceObjects.Count; i++)
+        for (int i = 0; i < spaceObjects.Count; i++)
         {
             GameObject spaceObject = null;
-            for(int j = 0; j < spaceObjects[i].count; j++)
+            for (int j = 0; j < spaceObjects[i].count; j++)
             {
                 spaceObject = spaceObjects[i].spaceObject;
                 GameObject spcObject = MonoBehaviour.Instantiate(spaceObject, spaceObject.transform.position, spaceObject.transform.rotation, context);
@@ -72,14 +74,14 @@ public class EnemyPool : ObjectPools
     public Transform origin;
 
     public float repeatTime;
-    public float width,height;
+    public float width, height;
 
     private RepeatTime rptime = new RepeatTime();
 
 
     public void Spawn()
     {
-        if (rptime.Repeat(repeatTime) && inPool.Count>0)
+        if (rptime.Repeat(repeatTime) && inPool.Count > 0)
         {
             Transform trsfm;
             float x = UnityEngine.Random.Range(origin.transform.position.x - width / 2, origin.transform.position.x + width / 2);
@@ -95,8 +97,19 @@ public class EnemyPool : ObjectPools
 
 
 }
+[Serializable]
+public class BulletPool : ObjectPools
+{
+    public void Spawn(Vector3 position, float z)
+    {
+        Transform trsfm = Out(0).transform;
+        trsfm.position = position;
+        trsfm.rotation = Quaternion.Euler(0, 0, z);
+
+    }
 
 
+}
 
 [Serializable]
 public class SpaceObject
@@ -109,7 +122,7 @@ public class RepeatTime
 {
 
     private float currentTime;
-    
+
 
     public bool Repeat(float repeatTime)
     {
