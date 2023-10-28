@@ -11,7 +11,10 @@ public class Game_Manager : MonoBehaviour
     [HideInInspector] public bool gameEnded = false;
     [SerializeField] private SpawnManager spawnManager;
 
-    [Space] [Header("Game Settings")][Space] [Space]
+    [Space] [Header("Game Objects")] [Space] [Space]
+    public Camera cam;
+
+    [Space] [Header("Game Settings")] [Space] [Space]
     public float timer;
     public float survivalTime;
 
@@ -76,6 +79,8 @@ public class Game_Manager : MonoBehaviour
             
             UI_Manager.instance.deathScreen.SetActive(true);   
         }
+        
+        cam.transform.position = new Vector3(0, 0, 50f);
             
         gameEnded = true;
     }
@@ -86,6 +91,8 @@ public class Game_Manager : MonoBehaviour
         {
             if (isPaused)
             {
+                cam.transform.position = new Vector3(0, 0, 50f);
+                    
                 UI_Manager.instance.gameplayScreen.SetActive(false);
                 UI_Manager.instance.pauseScreen.SetActive(true);
 
@@ -94,6 +101,8 @@ public class Game_Manager : MonoBehaviour
             }
             else
             {
+                cam.transform.position = new Vector3(0, 0, -10f);
+                
                 UI_Manager.instance.gameplayScreen.SetActive(true);
                 UI_Manager.instance.pauseScreen.SetActive(false);
                 
