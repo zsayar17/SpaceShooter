@@ -6295,6 +6295,14 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 731968551410661831, guid: bba541a80afd793458ef1182f9057874, type: 3}
+      propertyPath: dashStamina
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 731968551410661831, guid: bba541a80afd793458ef1182f9057874, type: 3}
+      propertyPath: staminaGain
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 731968551410661831, guid: bba541a80afd793458ef1182f9057874, type: 3}
       propertyPath: movemanager._rotate_speed
       value: 10
       objectReference: {fileID: 0}
@@ -8635,6 +8643,7 @@ MonoBehaviour:
   staminaEaseSlider: {fileID: 733150936}
   bossHealthbarSlider: {fileID: 1380563034}
   bossHealthbarEaseSlider: {fileID: 1640961617}
+  canGainStamina: 0
   timerText: {fileID: 497547210}
   scoreText: {fileID: 2035984334}
   endScoreText: {fileID: 554593724}

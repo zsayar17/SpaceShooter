@@ -9,6 +9,8 @@ public class PlayerShip : Ship
     private float dashLerp;
 
     public float stamina = 100;
+    public float dashStamina;
+    public float staminaGain;
     
     public override void move()
     {
@@ -24,18 +26,18 @@ public class PlayerShip : Ship
         if (dashLerp != 0f)
             dashLerp = Mathf.Lerp(dashLerp, 0, 10 * Time.deltaTime);
         
-        if (Input.GetKeyDown(KeyCode.Space) && stamina >= 50f)
+        if (Input.GetKeyDown(KeyCode.Space) && stamina >= dashStamina)
         {
             dashLerp = dashForce;
-            stamina -= 50f;
+            stamina -= dashStamina;
             
-            UI_Manager.instance.ChangeStamina(50f);
+            UI_Manager.instance.ChangeStamina(dashStamina);
         }
 
         if (stamina < 100 && UI_Manager.instance.canGainStamina)
         {
-            stamina += 10 * Time.deltaTime;
-            UI_Manager.instance.ChangeStamina(10 * Time.deltaTime, true);
+            stamina += staminaGain * Time.deltaTime;
+            UI_Manager.instance.ChangeStamina(staminaGain * Time.deltaTime, true);
         }
     }
 

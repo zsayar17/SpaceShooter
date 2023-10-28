@@ -72,10 +72,14 @@ public class UI_Manager : MonoBehaviour
             if (healthbarEaseSlider.value > healthbarSlider.value && healthEaseWaitTime <= 0)
                 healthbarEaseSlider.value -= 100 * Time.deltaTime;
 
-            if (staminaEaseSlider.value > staminaSlider.value && staminaEaseWaitTime <= 0)
+            if (staminaEaseSlider.value > staminaSlider.value)
             {
-                staminaEaseSlider.value -= 100 * Time.deltaTime;
                 canGainStamina = false;
+            
+                if (staminaEaseWaitTime > 0)
+                    staminaEaseWaitTime -= Time.deltaTime;
+                else
+                    staminaEaseSlider.value -= 100 * Time.deltaTime;
             }
             else
                 canGainStamina = true;
@@ -121,12 +125,9 @@ public class UI_Manager : MonoBehaviour
             staminaEaseSlider.value += stamina;
         }
         else
-        {
             staminaSlider.value -= stamina;
-            staminaEaseSlider.value -= stamina;
-        }
-
-        staminaEaseWaitTime = .25f;
+        
+        staminaEaseWaitTime = .25f;   
     }
     public void ChangeBossHealth(float damage)
     {
