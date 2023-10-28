@@ -36,28 +36,13 @@ public class Game_Manager : MonoBehaviour
             
             if (timer <= 0)
             {
-                // Spawn boss
-                //UI_Manager.instance.ShowBossHealth();
-                //UI_Manager.instance.ChangeBossHealth(25); // boss get damage
+                UI_Manager.instance.ShowBossHealth();
             }
             else
             {
                 timer -= Time.deltaTime;
                 UI_Manager.instance.timerText.text = Mathf.Round(timer).ToString();
             }
-            
-            // Diğer objeler ile bağlanacak
-            //UI_Manager.instance.ChangeHealth(25); // get damage
-            //
-            //UI_Manager.instance.ChangeStamina(50); // dash
-            //
-            //// if boss is on scene
-            //
-            
-            //
-            //// enemy death
-            //
-            //UI_Manager.instance.ChangeScore(UnityEngine.Random.Range(50,150));
         }
     }
 
