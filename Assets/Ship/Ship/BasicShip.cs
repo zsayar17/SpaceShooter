@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class BasicShip : Ship
@@ -23,8 +24,8 @@ public class BasicShip : Ship
     {
         if (!istimesup) return;
 
-        //actionmanager.spawn()
-        //actionmanager.spawn()
+        Instantiate(bullet, rightwing).GetComponent<BasicMissile>().owner = "enemy";
+        Instantiate(bullet, leftwing).GetComponent<BasicMissile>().owner = "enemy";
         istimesup = false;
     }
     public override IEnumerator waitToAction()

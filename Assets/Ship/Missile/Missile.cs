@@ -9,6 +9,7 @@ public class Missile : MonoBehaviour
 
     [SerializeField] public float speed;
     [SerializeField] public float damage;
+    public string owner;
 
     void Awake()
     {

@@ -14,7 +14,7 @@ public class KamikazeShip : Ship
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if (actionmanager.hitDamage(collision, "player", damage))
-        //    Destroy(gameObject); //give back to pool
+        if (actionmanager.hitDamage(collision, "player", damage))
+            Destroy(gameObject);
     }
 }

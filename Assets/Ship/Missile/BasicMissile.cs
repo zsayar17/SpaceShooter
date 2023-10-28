@@ -18,7 +18,8 @@ public class BasicMissile : Missile
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if (actionmanager.hitDamage(collision, "player", damage))
-            //Destroy(gameObject); //give back to pool
+        if ((owner == "enemy" && actionmanager.hitDamage(collision, "player", damage))
+            || actionmanager.hitDamage(collision, "enemy", damage))
+            Destroy(gameObject);
     }
 }

@@ -10,7 +10,8 @@ public class Ship : MonoBehaviour
     [SerializeField] public float health;
     [SerializeField] protected float actiontime;
     [SerializeField] protected MoveManager movemanager;
-protected ActionManager actionmanager;
+    protected ActionManager actionmanager;
+    public GameObject bullet;
 
     public float Speed { get { return speed; } set {  speed = value; } }
     public float Health { get { return health; } set {  health = value; } }
