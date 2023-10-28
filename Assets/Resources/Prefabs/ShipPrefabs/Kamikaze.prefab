@@ -97,10 +97,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac1f4c08b95b3ac4d97512f36b6145f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  health: 0
+  speed: 0.25
+  health: 50
   actiontime: 0
   movemanager:
-    _rotate_speed: 0.58
+    _rotate_speed: 10
   playertransform: {fileID: 0}
-  damage: 0
+  damage: 50

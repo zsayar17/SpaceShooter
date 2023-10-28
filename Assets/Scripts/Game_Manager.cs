@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -12,15 +13,21 @@ public class Game_Manager : MonoBehaviour
     [SerializeField] public SpawnManager spawnManager;
 
     [Space] [Header("Game Objects")] [Space] [Space]
+    public Transform playerTransform;
     public Camera cam;
+    public GameObject[] enemyShips;
 
     [Space] [Header("Game Settings")] [Space] [Space]
     public float timer;
     public float survivalTime;
 
+    private float generateTimer;
+
     private void Awake()
     {
         if (instance == null) instance = this;
+        
+        generateTimer = Random.Range(1f, 10f);
     }
 
     private void Update()
@@ -42,8 +49,29 @@ public class Game_Manager : MonoBehaviour
             {
                 timer -= Time.deltaTime;
                 UI_Manager.instance.timerText.text = Mathf.Round(timer).ToString();
+
+                if (generateTimer <= 0f)
+                {
+                    GenerateEnemyShips(Random.Range(0, enemyShips.Length));
+                }
+                else
+                {
+                    generateTimer -= Time.deltaTime;
+                }
             }
         }
+    }
+
+    private void GenerateEnemyShips(int rnd)
+    {
+        Vector3 pos = new Vector3(Random.Range(0, 30), Random.Range(-20, 20), 0f);
+        GameObject enemy = Instantiate(enemyShips[rnd], pos, Quaternion.identity);
+        if (enemy.GetComponent<BasicShip>())
+            enemy.GetComponent<BasicShip>().playertransform = playerTransform; 
+        else if (enemy.GetComponent<KamikazeShip>())
+            enemy.GetComponent<KamikazeShip>().playertransform = playerTransform;
+
+        generateTimer = Random.Range(2f, 5f);
     }
 
     public void EndGame(bool win=false)

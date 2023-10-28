@@ -129,8 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4130d97f5cc7775409d62b95b2e31701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  health: 0
+  speed: 0.1
+  health: 300
   actiontime: 0
   movemanager:
-    _rotate_speed: 0
+    _rotate_speed: 10
