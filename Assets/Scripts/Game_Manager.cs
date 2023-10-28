@@ -11,6 +11,10 @@ public class Game_Manager : MonoBehaviour
     [HideInInspector] public bool gameEnded = false;
     [SerializeField] private SpawnManager spawnManager;
 
+    [Space] [Header("Game Settings")][Space] [Space]
+    public float timer;
+    public float survivalTime;
+
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -25,6 +29,20 @@ public class Game_Manager : MonoBehaviour
 
         if (!isPaused && !gameEnded)
         {
+            survivalTime += Time.deltaTime;
+            
+            if (timer <= 0)
+            {
+                // Spawn boss
+                //UI_Manager.instance.ShowBossHealth();
+                //UI_Manager.instance.ChangeBossHealth(25); // boss get damage
+            }
+            else
+            {
+                timer -= Time.deltaTime;
+                UI_Manager.instance.timerText.text = Mathf.Round(timer).ToString();
+            }
+            
             // Diğer objeler ile bağlanacak
             //UI_Manager.instance.ChangeHealth(25); // get damage
             //
@@ -32,8 +50,7 @@ public class Game_Manager : MonoBehaviour
             //
             //// if boss is on scene
             //
-            //UI_Manager.instance.ShowBossHealth();
-            //UI_Manager.instance.ChangeBossHealth(25); // boss get damage
+            
             //
             //// enemy death
             //
@@ -41,12 +58,24 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
-    private void EndGame()
+    public void EndGame(bool win=false)
     {
-        UI_Manager.instance.gameplayScreen.SetActive(false);
-        UI_Manager.instance.pauseScreen.SetActive(false);
+        if (win) // Win
+        {
+            UI_Manager.instance.gameplayScreen.SetActive(false);
+            UI_Manager.instance.pauseScreen.SetActive(false);
+            UI_Manager.instance.deathScreen.SetActive(false);
             
-        UI_Manager.instance.deathScreen.SetActive(true);
+            UI_Manager.instance.winScreen.SetActive(true);
+        }
+        else // Lose
+        {
+            UI_Manager.instance.gameplayScreen.SetActive(false);
+            UI_Manager.instance.pauseScreen.SetActive(false);
+            UI_Manager.instance.winScreen.SetActive(false);
+            
+            UI_Manager.instance.deathScreen.SetActive(true);   
+        }
             
         gameEnded = true;
     }

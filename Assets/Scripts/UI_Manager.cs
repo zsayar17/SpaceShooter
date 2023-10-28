@@ -13,9 +13,10 @@ public class UI_Manager : MonoBehaviour
     public GameObject gameplayScreen;
     public GameObject pauseScreen;
     public GameObject deathScreen;
+    public GameObject winScreen;
     public GameObject redDamage;
     
-    [Space][Header("Slider Bars")][Space] [Space]
+    [Space] [Header("Slider Bars")][Space] [Space]
     public Slider healthbarSlider;
     public Slider healthbarEaseSlider;
     
@@ -29,9 +30,11 @@ public class UI_Manager : MonoBehaviour
     private float staminaEaseWaitTime;
     private float bossHealthEaseWaitTime;
     
-    [Space][Header("Text References")][Space] [Space]
+    [Space] [Header("Text References")][Space] [Space]
+    public TMP_Text timerText;
     public TMP_Text scoreText;
     public TMP_Text endScoreText;
+    public TMP_Text survivalTimeText;
     private float currentScore;
     private float tempScore;
 
@@ -41,11 +44,14 @@ public class UI_Manager : MonoBehaviour
         
         pauseScreen.SetActive(false);
         deathScreen.SetActive(false);
+        winScreen.SetActive(false);
         gameplayScreen.SetActive(true);
         
         bossHealthbarSlider.transform.parent.gameObject.SetActive(false);
         
         scoreText.text = "0";
+        timerText.text = Game_Manager.instance.timer.ToString();
+        survivalTimeText.text = "You survived for 0 seconds";
     }
 
     private void Update()
@@ -82,6 +88,7 @@ public class UI_Manager : MonoBehaviour
         else if (Game_Manager.instance.gameEnded)
         {
             endScoreText.text = "Your Score: " + currentScore;
+            survivalTimeText.text = "You survived for "+ Mathf.Round(Game_Manager.instance.survivalTime) + " seconds";
         }
     }
     
